@@ -105,7 +105,16 @@ class Chewie
     end
   end
 
-  def display_table
+  def display_simple_table
+    table = TTY::Table.new(
+      header: [@half_eaten_mass.first.keys[0], @half_eaten_mass.first.keys[5]],
+      rows: @half_eaten_mass.map { |row| [row.values[0], "#{(row.values[5] *100).round(2)}%"] }
+    )
+
+    table.render(:basic)
+  end
+
+  def display_fancy_table
     table = TTY::Table.new(
       header: @half_eaten_mass.first.keys,
       rows: @half_eaten_mass.map(&:values)
@@ -135,6 +144,6 @@ end
 
 chewie = Chewie.new
 chewie.chew
-puts chewie.display_table
+puts chewie.display_simple_table
 chewie.sell
 chewie.buy
