@@ -80,8 +80,8 @@ class Chewie
       next unless position_will_sell
 
       volume = balance[position_will_sell] # everything we have
-      # @client.add_order(pair: pair, type: 'sell', ordertype: 'market', volume: volume)
-      puts "Would sell #{pair} at #{volume}"
+      @client.add_order(pair: pair, type: 'sell', ordertype: 'market', volume: volume)
+      puts "Selling #{volume} of #{pair}"
     end
   end
 
@@ -100,8 +100,8 @@ class Chewie
     pairs_wanna_buy.each do |pair|
       last_price = ticker_response['result'][pair]['c'].first.to_f
       volume = xbt_per_trade / last_price
-      # @client.add_order(pair: pair, type: 'buy', ordertype: 'market', volume: volume)
-      puts "Would buy #{pair} at #{volume}"
+      @client.add_order(pair: pair, type: 'buy', ordertype: 'market', volume: volume)
+      puts "Buying #{volume} of #{pair}"
     end
   end
 
